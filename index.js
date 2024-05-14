@@ -51,10 +51,10 @@ function generateLogo(text, textColor, shape, shapeColor) {
             element = new Square(textColor, shapeColor, text);
             break; 
         case 'circle':
-            element = new Circle(shapeColor);
+            element = new Circle(textColor, shapeColor, text);
             break; 
         case 'triangle':
-            element = new Triangle(shapeColor);
+            element = new Triangle(textColor, shapeColor, text);
             break; 
         default:
             throw new Error('Invalid shape')

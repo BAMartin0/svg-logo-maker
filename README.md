@@ -4,6 +4,8 @@
   ## Description
   This project was created to generate a logo using any 3 letters of your choice, a shape of your choice (circle, square, triangle), and any color of your choice for the shape and text. 
   ![alt text](<Screenshot 2024-05-14 132731.png>)
+
+   Here's a video walkthrough [Video Walkthrough](https://drive.google.com/file/d/1QxcDlcCZ7uiCPyQpnkMjpZzPHxIU0FSC/view?usp=sharing)
   
   ## Table of Contents
   [Installation](#installation)
