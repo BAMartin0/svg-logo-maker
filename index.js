@@ -1,6 +1,7 @@
 //Include Inquirer for prompts
-const inquirer = require('inquirer');
-const fs = require('fs')
+const inquirer = require("inquirer");
+const fs = require("fs")
+const {Square, Circle, Triangle} =require("./lib/shapes")
 
 
 
@@ -10,6 +11,9 @@ const questions = [
     type: "input",
     name: "text",
     message: "What (3 character) text would you like?",
+    validate: function (input) {
+      return input.length === 3 || "Text must be exactly 3 characters!";
+    },
   },
 
   {
@@ -23,7 +27,7 @@ const questions = [
     type: "list",
     name: "shape",
     message: "Choose a shape.",
-    choices: [square, circle, triangle],
+    choices: ["square", "circle", "triangle"],
   },
 
   {
@@ -36,15 +40,26 @@ const questions = [
 
 
 
+//function to generate logo
 
+function generateLogo(text, textColor, shape, shapeColor) {
+    
+    let element;
 
-//
-
-
-
-
-//
-
+    switch (shape) {
+        case 'square':
+            element = new Square(shapeColor);
+            break; 
+        case 'circle':
+            element = new Circle(shapeColor);
+            break; 
+        case 'triangle':
+            element = new Triangle(shapeColor);
+            break; 
+        default:
+            throw new Error('Invalid shape')
+    }
+}
 
 
 
@@ -64,9 +79,10 @@ function writeToFile(fileName, data) {
 function init() {
     inquirer.prompt(questions)
         .then((response) => { 
-            const pageContent = generateMarkdown(response); 
+            const pageContent = generateLogo(response); 
+            
+            writeToFile('logo.svg', pageContent)
 
-            fs.writeFile('logo.svg', pageContent, (err) => err ? console.log(err) : console.log('File created successfully'))
          });
 }
 
