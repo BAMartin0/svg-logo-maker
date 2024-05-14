@@ -48,7 +48,7 @@ function generateLogo(text, textColor, shape, shapeColor) {
 
     switch (shape) {
         case 'square':
-            element = new Square(shapeColor);
+            element = new Square(textColor, shapeColor, text);
             break; 
         case 'circle':
             element = new Circle(shapeColor);
@@ -59,6 +59,9 @@ function generateLogo(text, textColor, shape, shapeColor) {
         default:
             throw new Error('Invalid shape')
     }
+    
+    return element
+
 }
 
 
@@ -67,23 +70,23 @@ function generateLogo(text, textColor, shape, shapeColor) {
 
 function writeToFile(fileName, data) {
   fs.writeFile(fileName, data, (err) => {
-    if (err) {
+      if (err) {
       console.log(err);
     } else {
-      console.log("File created succesfully");
+        console.log("Generated logo.svg");
     }
-  });
+});
 }
 
 // TODO: Create a function to initialize app
 function init() {
     inquirer.prompt(questions)
-        .then((response) => { 
-            const pageContent = generateLogo(response); 
-            
-            writeToFile('logo.svg', pageContent)
-
-         });
+    .then(({shape, text, textColor, shapeColor}) => { 
+       const pageContent= generateLogo(text, textColor, shape, shapeColor); 
+        
+        
+        writeToFile('logo.svg', pageContent.render())
+    });
 }
 
 // Function call to initialize app
